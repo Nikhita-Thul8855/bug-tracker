@@ -4,8 +4,8 @@
   "description": "Backend for Bug Tracker MERN App",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node server.js"
+    
   },
   "keywords": [],
   "author": "",
