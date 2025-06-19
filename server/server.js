@@ -7,36 +7,34 @@ const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 const commentRoutes = require("./routes/commentRoutes");
-
-// Kanban board routes
 const boardRoutes = require("./routes/boardRoutes");
 const columnRoutes = require("./routes/columnRoutes");
 const cardRoutes = require("./routes/cardRoutes");
 
 const app = express();
 
-// ✅ Enable CORS for frontend origin
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://your-frontend.vercel.app" // <-- replace with your deployed frontend URL
+  ],
+  credentials: true
+}));
 
-// ✅ JSON parser
 app.use(express.json());
 
-// ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tickets", ticketRoutes);
 app.use("/api/comments", commentRoutes);
-
-// Kanban board routes
 app.use("/api/boards", boardRoutes);
 app.use("/api/columns", columnRoutes);
 app.use("/api/cards", cardRoutes);
 
-// ✅ MongoDB Connection and Start Server
 const PORT = process.env.PORT || 5003;
 
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(process.env.MONGODB_URI, { // <-- make sure this matches your Render env var
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
